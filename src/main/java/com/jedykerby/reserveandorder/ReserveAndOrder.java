@@ -31,18 +31,10 @@ public class ReserveAndOrder {
             System.out.println(option);
 
             switch (option) {
-                case 0:
-                    System.out.println("Customer");
-                    break;
-                case 1:
-                    System.out.println("Admin");
-                    break;
-                case 2:
-                    System.exit(0);
-                    break;
-                case -1:
-                    System.exit(0);
-                    break;
+                case 0 -> System.out.println("Customer");
+                case 1 -> System.out.println("Admin");
+                case 2 -> System.exit(0);
+                case -1 -> System.exit(0);
             }
             
         }
