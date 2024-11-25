@@ -30,7 +30,7 @@ public class ReserveAndOrder {
                 menu, 
                 menu[0]);
             
-            System.out.println("nice");
+            System.out.println("again");
 
             switch (option) {
                 case 0 -> System.out.println("Customer");
