@@ -3,3 +3,6 @@
 
 # All .form files in target/classes
 **/target/classes/**/*.form
+
+# maven status and compiler-plugin files
+**/target/maven-status/**/*.lst
