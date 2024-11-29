@@ -16,4 +16,5 @@
 
 
 # Note
+## Ikaw na bahala sa layout just make it simple
 ## Ako na bahala sa code design mo muna gagawa ako ng dalawang frames (Admin/Customer) 
