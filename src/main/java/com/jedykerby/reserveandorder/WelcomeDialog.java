@@ -4,8 +4,6 @@
  */
 package com.jedykerby.reserveandorder;
 
-import users.User;
-
 /**
  *
  * @author YTAC
