@@ -44,6 +44,14 @@ public class SignInDialogForAdmin extends java.awt.Dialog {
 
         inputpassword.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
         inputpassword.setText("Password");
+        inputpassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputpasswordFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputpasswordFocusLost(evt);
+            }
+        });
         inputpassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputpasswordActionPerformed(evt);
@@ -119,6 +127,22 @@ public class SignInDialogForAdmin extends java.awt.Dialog {
             System.exit(0);
         }
     }//GEN-LAST:event_signInActionPerformed
+
+    private void inputpasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputpasswordFocusGained
+        
+        if (inputpassword.getText().equals("Password")) {
+            inputpassword.setText("");
+        }
+
+    }//GEN-LAST:event_inputpasswordFocusGained
+
+    private void inputpasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputpasswordFocusLost
+        
+        if (inputpassword.getText().equals("")) {
+            inputpassword.setText("Password");
+        }
+
+    }//GEN-LAST:event_inputpasswordFocusLost
 
     /**
      * @param args the command line arguments
