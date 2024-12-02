@@ -6,3 +6,9 @@
 
 # maven status and compiler-plugin files
 **/target/maven-status/**/*.lst
+
+# .vscode/
+.vscode/
+
+# database
+main.db
