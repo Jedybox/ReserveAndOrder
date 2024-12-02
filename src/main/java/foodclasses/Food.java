@@ -2,7 +2,7 @@ package foodclasses;
 
 import javax.swing.ImageIcon;
 
-public class Food {
+public abstract class Food {
     
     private ImageIcon image;
     private String name;
