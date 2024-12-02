@@ -4,17 +4,15 @@ import javax.swing.ImageIcon;
 
 public class Food {
     
-    private FoodType type;
     private ImageIcon image;
     private String name;
     private double price;
     private int quantity = 0;
 
-    public Food( ImageIcon image, String name, double price, FoodType type ) {
+    public Food( ImageIcon image, String name, double price) {
         this.image = image;
         this.name = name;
         this.price = price;
-        this.type = type;
     }
 
     public ImageIcon getImage() {
@@ -49,11 +47,4 @@ public class Food {
         return price * quantity;
     }
 
-    public FoodType getType() {
-        return type;
-    }
-
-    public void setType(FoodType type) {
-        this.type = type;
-    }
 }
