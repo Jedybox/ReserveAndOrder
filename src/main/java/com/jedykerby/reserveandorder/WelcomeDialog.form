@@ -84,6 +84,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Customer"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="customerbtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="adminbtn">
       <Properties>
@@ -95,6 +98,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Admin"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adminbtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>

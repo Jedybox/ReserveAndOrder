@@ -4,6 +4,11 @@
  */
 package com.jedykerby.reserveandorder;
 
+import javax.swing.JOptionPane;
+
+import dbms.DatabaseManager;
+import users.Customer;
+
 /**
  *
  * @author YTAC
@@ -68,6 +73,11 @@ public class SignInDialog extends java.awt.Dialog {
         signIn.setBackground(new java.awt.Color(102, 204, 255));
         signIn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         signIn.setText("Sign in");
+        signIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signInActionPerformed(evt);
+            }
+        });
 
         signUp.setBackground(new java.awt.Color(255, 153, 51));
         signUp.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -136,8 +146,33 @@ public class SignInDialog extends java.awt.Dialog {
     }//GEN-LAST:event_inputPassActionPerformed
 
     private void signUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpActionPerformed
-        // TODO add your handling code here:
+        
+        SignUpDialog signUpDialog = new SignUpDialog(null, true);
+        signUpDialog.setVisible(true);
+        setVisible(false);
+
     }//GEN-LAST:event_signUpActionPerformed
+
+    private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
+            
+            String username = inputUserName.getText();
+            String password = inputPass.getText();
+
+            if (!DatabaseManager.checkUser(username)) {
+                JOptionPane.showMessageDialog(null, "User not found");
+                return;
+            } 
+            
+            if (!DatabaseManager.getUserPassword(username).equals(password)) {
+                JOptionPane.showMessageDialog(null, "Incorrect password");
+                return;
+            }
+
+            int user_id = DatabaseManager.getUserId(username);
+
+            Customer customer = new Customer(username, password, user_id);
+
+    }//GEN-LAST:event_signInActionPerformed
 
     /**
      * @param args the command line arguments

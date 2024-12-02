@@ -4,6 +4,8 @@
  */
 package com.jedykerby.reserveandorder;
 
+import users.User;
+
 /**
  *
  * @author YTAC
@@ -13,9 +15,10 @@ public class WelcomeDialog extends java.awt.Dialog {
     /**
      * Creates new form WelcomeDialog
      */
-    public WelcomeDialog(java.awt.Frame parent, boolean modal) {
+    public WelcomeDialog(java.awt.Frame parent, boolean modal, User user) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -48,10 +51,20 @@ public class WelcomeDialog extends java.awt.Dialog {
         customerbtn.setBackground(new java.awt.Color(102, 204, 255));
         customerbtn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         customerbtn.setText("Customer");
+        customerbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerbtnActionPerformed(evt);
+            }
+        });
 
         adminbtn.setBackground(new java.awt.Color(255, 153, 51));
         adminbtn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         adminbtn.setText("Admin");
+        adminbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminbtnActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabel3.setText("Welcome to");
@@ -93,9 +106,31 @@ public class WelcomeDialog extends java.awt.Dialog {
      * Closes the dialog
      */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
-        setVisible(false);
-        dispose();
+        int response = javax.swing.JOptionPane.showConfirmDialog(
+            this, 
+            "Are you sure you want to close?", 
+            "Confirm Close", 
+            javax.swing.JOptionPane.YES_NO_OPTION
+        );
+
+        if (response == javax.swing.JOptionPane.YES_OPTION) {
+            setVisible(false);
+            System.exit(0);
+            dispose();
+        }
     }//GEN-LAST:event_closeDialog
+
+    private void adminbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminbtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adminbtnActionPerformed
+
+    private void customerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerbtnActionPerformed
+        
+        SignInDialog signInDialog = new SignInDialog(null, true);
+        signInDialog.setVisible(true);
+        setVisible(false);
+
+    }//GEN-LAST:event_customerbtnActionPerformed
 
     /**
      * @param args the command line arguments

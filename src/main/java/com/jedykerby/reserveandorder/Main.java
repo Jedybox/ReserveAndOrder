@@ -4,16 +4,20 @@
  */
 package com.jedykerby.reserveandorder;
 
+import java.util.Scanner;
+
 /**
  *
  * @author YTAC
  */
+
+import users.User;
+
 public class Main {
     
     public static void main(String[] args) {
-        
-
-
-    }
-    
+        User user = new User();
+        WelcomeDialog wcdialog = new WelcomeDialog(null, false, user);
+        wcdialog.setVisible(true);
+    }    
 }

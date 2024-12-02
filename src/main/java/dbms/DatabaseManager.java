@@ -20,6 +20,25 @@ public class DatabaseManager {
     
     static String url = "jdbc:sqlite:main.db"; 
     
+    public static int getUserId(String name) {
+        String selectSQL = "SELECT id FROM customers WHERE name = '" + name + "';";
+
+        try (Connection conn = DriverManager.getConnection(url); 
+            Statement stmt = conn.createStatement();) {
+
+            ResultSet rs = stmt.executeQuery(selectSQL);
+
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return -1;
+    }
+
     public static String getUserPassword(String name) {
         String selectSQL = "SELECT password FROM customers WHERE name = '" + name + "';";
 
@@ -39,7 +58,7 @@ public class DatabaseManager {
         return null;
     }
 
-    public static boolean isExistingCustomer(String name) {
+    public static boolean checkUser(String name) {
         String selectSQL = "SELECT name FROM customers WHERE name = '" + name + "';";
 
         try (Connection conn = DriverManager.getConnection(url); 

@@ -3,9 +3,7 @@ package users;
 public class User {
     
     private String name;
-    private boolean isAdmin = false;
-
-    public User() {}
+    private boolean isAdmin;
 
     public void setName( String name ) {
         this.name = name;
