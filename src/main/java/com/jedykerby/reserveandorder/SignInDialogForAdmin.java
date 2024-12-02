@@ -27,9 +27,9 @@ public class SignInDialogForAdmin extends java.awt.Dialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        inputpassword = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        signIn = new javax.swing.JToggleButton();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -40,15 +40,15 @@ public class SignInDialogForAdmin extends java.awt.Dialog {
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 24)); // NOI18N
         jLabel1.setText("Sign in");
 
-        jTextField1.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
-        jTextField1.setText("Password");
+        inputpassword.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
+        inputpassword.setText("Password");
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel2.setText("Password:");
 
-        jToggleButton1.setBackground(new java.awt.Color(102, 204, 255));
-        jToggleButton1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jToggleButton1.setText("Sign in");
+        signIn.setBackground(new java.awt.Color(102, 204, 255));
+        signIn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        signIn.setText("Sign in");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -58,8 +58,8 @@ public class SignInDialogForAdmin extends java.awt.Dialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton1)
+                    .addComponent(inputpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(signIn)
                     .addComponent(jLabel1))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
@@ -71,9 +71,9 @@ public class SignInDialogForAdmin extends java.awt.Dialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inputpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(jToggleButton1)
+                .addComponent(signIn)
                 .addContainerGap(64, Short.MAX_VALUE))
         );
 
@@ -107,9 +107,9 @@ public class SignInDialogForAdmin extends java.awt.Dialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField inputpassword;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton signIn;
     // End of variables declaration//GEN-END:variables
 }
