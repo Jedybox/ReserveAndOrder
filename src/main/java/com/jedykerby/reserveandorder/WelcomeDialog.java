@@ -15,7 +15,7 @@ public class WelcomeDialog extends java.awt.Dialog {
     /**
      * Creates new form WelcomeDialog
      */
-    public WelcomeDialog(java.awt.Frame parent, boolean modal, User user) {
+    public WelcomeDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -121,14 +121,16 @@ public class WelcomeDialog extends java.awt.Dialog {
     }//GEN-LAST:event_closeDialog
 
     private void adminbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminbtnActionPerformed
-        // TODO add your handling code here:
+        SignInDialogForAdmin signInDialog = new SignInDialogForAdmin(null, false);
+        signInDialog.setVisible(true);
+        dispose();
     }//GEN-LAST:event_adminbtnActionPerformed
 
     private void customerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerbtnActionPerformed
         
-        SignInDialog signInDialog = new SignInDialog(null, true);
+        SignInDialog signInDialog = new SignInDialog(null, false);
         signInDialog.setVisible(true);
-        setVisible(false);
+        dispose();
 
     }//GEN-LAST:event_customerbtnActionPerformed
 

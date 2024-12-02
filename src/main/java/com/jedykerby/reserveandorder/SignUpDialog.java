@@ -4,6 +4,10 @@
  */
 package com.jedykerby.reserveandorder;
 
+import javax.swing.JOptionPane;
+
+import dbms.DatabaseManager;
+
 /**
  *
  * @author YTAC
@@ -13,9 +17,11 @@ public class SignUpDialog extends java.awt.Dialog {
     /**
      * Creates new form SignUpDialog
      */
+
     public SignUpDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -50,9 +56,12 @@ public class SignUpDialog extends java.awt.Dialog {
 
         inputUserName.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
         inputUserName.setText("Username");
-        inputUserName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputUserNameActionPerformed(evt);
+        inputUserName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputUserNameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputUserNameFocusLost(evt);
             }
         });
 
@@ -61,9 +70,12 @@ public class SignUpDialog extends java.awt.Dialog {
 
         inputPass.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
         inputPass.setText("Password");
-        inputPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputPassActionPerformed(evt);
+        inputPass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputPassFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputPassFocusLost(evt);
             }
         });
 
@@ -72,10 +84,28 @@ public class SignUpDialog extends java.awt.Dialog {
 
         reInputPass.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
         reInputPass.setText("Re-enter Password");
+        reInputPass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                reInputPassFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                reInputPassFocusLost(evt);
+            }
+        });
+        reInputPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reInputPassActionPerformed(evt);
+            }
+        });
 
         register.setBackground(new java.awt.Color(255, 153, 102));
         register.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         register.setText("Register");
+        register.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -124,17 +154,101 @@ public class SignUpDialog extends java.awt.Dialog {
      * Closes the dialog
      */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
+        
+        SignInDialog dialog = new SignInDialog(null, false);
+        dialog.setVisible(true);
+        
         setVisible(false);
         dispose();
     }//GEN-LAST:event_closeDialog
 
-    private void inputUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputUserNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputUserNameActionPerformed
+    private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
+        
+        String username = inputUserName.getText();
+        String password = inputPass.getText();
+        String rePassword = reInputPass.getText();
 
-    private void inputPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputPassActionPerformed
+        if (!password.equals(rePassword)) {
+
+            JOptionPane.showMessageDialog(
+                this, 
+                "Password does not match", 
+                "Error", 
+                JOptionPane.INFORMATION_MESSAGE);
+
+            return;
+        }
+
+        if (DatabaseManager.checkUser(username)) {
+
+            JOptionPane.showMessageDialog(
+                this, 
+                "User already Existing", 
+                "Error", 
+                JOptionPane.INFORMATION_MESSAGE);
+
+            return;
+        }
+        
+        DatabaseManager.addCustomer(username, rePassword);
+
+        SignInDialog dialog = new SignInDialog(null, false);
+        dialog.setVisible(true);
+        
+        setVisible(false);
+        dispose();
+
+    }//GEN-LAST:event_registerActionPerformed
+
+    private void reInputPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reInputPassActionPerformed
+        
+        if (reInputPass.getText().equals("Re-enter Password")) {
+            reInputPass.setText("");
+        }
+
+    }//GEN-LAST:event_reInputPassActionPerformed
+
+    private void inputUserNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUserNameFocusGained
+            
+        if (inputUserName.getText().equals("Username")) {
+            inputUserName.setText("");
+        }
+    }//GEN-LAST:event_inputUserNameFocusGained
+
+    private void inputUserNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUserNameFocusLost
+            
+        if (inputUserName.getText().isBlank()) {
+            inputUserName.setText("Username");
+        }
+    }//GEN-LAST:event_inputUserNameFocusLost
+
+    private void inputPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusGained
+        
+        if (inputPass.getText().equals("Password")) {
+            inputPass.setText("");
+        }
+    }//GEN-LAST:event_inputPassFocusGained
+
+    private void inputPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusLost
+        
+        if (inputPass.getText().equals("")) {
+            inputPass.setText("Password");
+        }
+    }//GEN-LAST:event_inputPassFocusLost
+
+    private void reInputPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_reInputPassFocusGained
+        
+        if (reInputPass.getText().equals("Re-enter Password")) {
+            reInputPass.setText("");
+        }
+    }//GEN-LAST:event_reInputPassFocusGained
+
+    private void reInputPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_reInputPassFocusLost
+        
+        if (reInputPass.getText().isBlank()) {
+            reInputPass.setText("Re-enter Password");
+        }
+    }//GEN-LAST:event_reInputPassFocusLost
 
     /**
      * @param args the command line arguments

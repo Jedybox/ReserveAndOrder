@@ -13,9 +13,11 @@ public class SignInDialogForAdmin extends java.awt.Dialog {
     /**
      * Creates new form SignInDialogForAdmin
      */
+
     public SignInDialogForAdmin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -42,6 +44,11 @@ public class SignInDialogForAdmin extends java.awt.Dialog {
 
         inputpassword.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
         inputpassword.setText("Password");
+        inputpassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputpasswordActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabel2.setText("Password:");
@@ -49,6 +56,11 @@ public class SignInDialogForAdmin extends java.awt.Dialog {
         signIn.setBackground(new java.awt.Color(102, 204, 255));
         signIn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         signIn.setText("Sign in");
+        signIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signInActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -84,26 +96,33 @@ public class SignInDialogForAdmin extends java.awt.Dialog {
      * Closes the dialog
      */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
+        
+        WelcomeDialog welcomeDialog = new WelcomeDialog(new java.awt.Frame(), true);
+        welcomeDialog.setVisible(true);
+        
         setVisible(false);
         dispose();
     }//GEN-LAST:event_closeDialog
 
+    private void inputpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputpasswordActionPerformed
+        
+        if (inputpassword.getText().equals("Passowrd")) {
+            inputpassword.setText("");
+        }
+
+    }//GEN-LAST:event_inputpasswordActionPerformed
+
+    private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
+        
+        if (inputpassword.getText().equals("admin")) {
+            System.out.println("Sign in as admin");
+            System.exit(0);
+        }
+    }//GEN-LAST:event_signInActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                SignInDialogForAdmin dialog = new SignInDialogForAdmin(new java.awt.Frame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

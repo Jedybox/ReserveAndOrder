@@ -110,28 +110,17 @@ public class DatabaseManager {
                                 + "name TEXT NOT NULL UNIQUE,"
                                 + "password TEXT NOT NULL );";
         String insertSQL = "INSERT INTO customers(name, password) VALUES('" +name+ "', '"+pass+"');";
-        String selectSQL = "SELECT id, name, password FROM customers;";
 
         try (Connection conn = DriverManager.getConnection(url); 
             Statement stmt = conn.createStatement();) {
-
-                stmt.execute(insertSQL);
-                stmt.execute(createTableSQL);
                 
-                stmt.executeQuery(selectSQL);
-
-                ResultSet rs = stmt.executeQuery(selectSQL);
-
-                while (rs.next()) {
-                    System.out.println("ID: " + rs.getInt("id") + ", Name: " + rs.getString("name") + ", Email: " + rs.getString("password"));
-                }
-            
+                stmt.execute(createTableSQL);
+                stmt.execute(insertSQL);
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
-        System.out.println("nice");
     }
 
     public static void addReservation(Customer customer, Order order, int amount) {

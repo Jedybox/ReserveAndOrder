@@ -18,9 +18,12 @@ public class SignInDialog extends java.awt.Dialog {
     /**
      * Creates new form SignInDialog
      */
+
+     
     public SignInDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -53,9 +56,12 @@ public class SignInDialog extends java.awt.Dialog {
 
         inputUserName.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
         inputUserName.setText("Username");
-        inputUserName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputUserNameActionPerformed(evt);
+        inputUserName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputUserNameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputUserNameFocusLost(evt);
             }
         });
 
@@ -64,9 +70,12 @@ public class SignInDialog extends java.awt.Dialog {
 
         inputPass.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
         inputPass.setText("Password");
-        inputPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputPassActionPerformed(evt);
+        inputPass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputPassFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputPassFocusLost(evt);
             }
         });
 
@@ -133,23 +142,21 @@ public class SignInDialog extends java.awt.Dialog {
      * Closes the dialog
      */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
+        
+        WelcomeDialog welcomeDialog = new WelcomeDialog(null, false);
+        welcomeDialog.setVisible(true);
+
         setVisible(false);
         dispose();
     }//GEN-LAST:event_closeDialog
 
-    private void inputUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputUserNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputUserNameActionPerformed
-
-    private void inputPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputPassActionPerformed
-
     private void signUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpActionPerformed
         
-        SignUpDialog signUpDialog = new SignUpDialog(null, true);
+        SignUpDialog signUpDialog = new SignUpDialog(null, false);
         signUpDialog.setVisible(true);
+        
         setVisible(false);
+        dispose();
 
     }//GEN-LAST:event_signUpActionPerformed
 
@@ -172,7 +179,45 @@ public class SignInDialog extends java.awt.Dialog {
 
             Customer customer = new Customer(username, password, user_id);
 
+            System.out.println("Sign in as " + customer.getName());
+            System.err.println("User ID: " + customer.getId());
+            System.out.println("User Password: " + customer.getPassword());
+
+            System.exit(0);
+
     }//GEN-LAST:event_signInActionPerformed
+
+    private void inputUserNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUserNameFocusGained
+        
+        if (inputUserName.getText().equals("Username")) {
+            inputUserName.setText("");
+        }
+        
+    }//GEN-LAST:event_inputUserNameFocusGained
+
+    private void inputPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusGained
+        
+        if (inputPass.getText().equals("Password")) {
+            inputPass.setText("");
+        }
+
+    }//GEN-LAST:event_inputPassFocusGained
+
+    private void inputUserNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputUserNameFocusLost
+        
+        if (inputUserName.getText().isBlank()) {
+            inputUserName.setText("Username");
+        }
+        
+    }//GEN-LAST:event_inputUserNameFocusLost
+
+    private void inputPassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPassFocusLost
+        
+        if (inputPass.getText().equals("")) {
+            inputPass.setText("Password");
+        }
+        
+    }//GEN-LAST:event_inputPassFocusLost
 
     /**
      * @param args the command line arguments
