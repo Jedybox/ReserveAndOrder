@@ -41,7 +41,7 @@ public class WelcomeDialog extends java.awt.Dialog {
         });
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 24)); // NOI18N
-        jLabel1.setText("ReserveAndOrder");
+        jLabel1.setText("Par-Reserve");
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 18)); // NOI18N
         jLabel2.setText("Sign in as:");
@@ -79,7 +79,7 @@ public class WelcomeDialog extends java.awt.Dialog {
                     .addComponent(customerbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(219, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
