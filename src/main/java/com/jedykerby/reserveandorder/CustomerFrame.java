@@ -1566,11 +1566,6 @@ public class CustomerFrame extends javax.swing.JFrame {
         makeReservationPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         guestAmount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        guestAmount.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                guestAmountKeyTyped(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabel3.setText("Amount of Guest:");
@@ -2001,9 +1996,6 @@ public class CustomerFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void guestAmountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_guestAmountKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_guestAmountKeyTyped
 
     private void icedTeabtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_icedTeabtnActionPerformed
         
