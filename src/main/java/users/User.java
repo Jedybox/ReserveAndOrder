@@ -1,23 +1,14 @@
 package users;
 
-public class User {
+public abstract class User {
     
     private String name;
-    private boolean isAdmin;
 
     public void setName( String name ) {
         this.name = name;
     }
 
-    public void setAdmin( boolean isAdmin ) {
-        this.isAdmin = isAdmin;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
     }
 }
