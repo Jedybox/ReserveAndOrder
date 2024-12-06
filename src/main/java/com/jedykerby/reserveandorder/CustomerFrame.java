@@ -5,6 +5,13 @@
 package com.jedykerby.reserveandorder;
 
 import java.awt.Image;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+
+import javax.swing.JOptionPane;
+
+import users.Customer;
 
 /**
  *
@@ -15,9 +22,14 @@ public class CustomerFrame extends javax.swing.JFrame {
     /**
      * Creates new form CustomerFrame
      */
-    public CustomerFrame() {
+
+    Customer customer ;
+
+    public CustomerFrame(Customer customer) {
         initComponents();
         setLocationRelativeTo(null);
+        this.customer = customer;
+        this.greet.setText("Hi, " + customer.getName());
     }
 
     /**
@@ -31,11 +43,11 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        greet = new javax.swing.JLabel();
+        cardPages = new javax.swing.JPanel();
         welcome = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jButton12 = new javax.swing.JButton();
+        makeReservationbtn = new javax.swing.JButton();
         orderPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -178,20 +190,20 @@ public class CustomerFrame extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         makeReservationPanel = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        guestAmount = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        additionalDetails = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         date = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
+        hour = new javax.swing.JComboBox<>();
+        minutes = new javax.swing.JComboBox<>();
+        timing = new javax.swing.JComboBox<>();
+        orderbtn = new javax.swing.JButton();
+        makeReservationbtn2 = new javax.swing.JButton();
+        cancelbtn = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         detailsPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -233,8 +245,8 @@ public class CustomerFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setText("Par-Reserve");
 
-        jLabel22.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
-        jLabel22.setText("Hi,Guest");
+        greet.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+        greet.setText("Hi,Guest");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -244,7 +256,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(greet, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
@@ -253,17 +265,22 @@ public class CustomerFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel22))
+                    .addComponent(greet))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setLayout(new java.awt.CardLayout());
+        cardPages.setLayout(new java.awt.CardLayout());
 
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 48)); // NOI18N
         jLabel12.setText("Welcome to Par-reserve");
 
-        jButton12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButton12.setText("Make Reservation");
+        makeReservationbtn.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        makeReservationbtn.setText("Make Reservation");
+        makeReservationbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                makeReservationbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout welcomeLayout = new javax.swing.GroupLayout(welcome);
         welcome.setLayout(welcomeLayout);
@@ -276,7 +293,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                         .addComponent(jLabel12))
                     .addGroup(welcomeLayout.createSequentialGroup()
                         .addGap(341, 341, 341)
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(makeReservationbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(356, Short.MAX_VALUE))
         );
         welcomeLayout.setVerticalGroup(
@@ -285,11 +302,11 @@ public class CustomerFrame extends javax.swing.JFrame {
                 .addGap(138, 138, 138)
                 .addComponent(jLabel12)
                 .addGap(18, 18, 18)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(makeReservationbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(272, Short.MAX_VALUE))
         );
 
-        jPanel2.add(welcome, "card5");
+        cardPages.add(welcome, "card5");
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 102));
         jPanel3.setLayout(new java.awt.CardLayout());
@@ -1354,7 +1371,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         orderPanel.setLayout(orderPanelLayout);
         orderPanelLayout.setHorizontalGroup(
             orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1078, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(orderPanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jButton5)
@@ -1382,14 +1399,14 @@ public class CustomerFrame extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel2.add(orderPanel, "card4");
+        cardPages.add(orderPanel, "card4");
 
         makeReservationPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        guestAmount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        guestAmount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField1KeyTyped(evt);
+                guestAmountKeyTyped(evt);
             }
         });
 
@@ -1399,9 +1416,9 @@ public class CustomerFrame extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabel4.setText("Additional Details (Optional):");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        additionalDetails.setColumns(20);
+        additionalDetails.setRows(5);
+        jScrollPane1.setViewportView(additionalDetails);
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabel5.setText("Date:");
@@ -1411,22 +1428,37 @@ public class CustomerFrame extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabel6.setText("Time:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", " " }));
+        hour.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", " " }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "15", "30", "45" }));
+        minutes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "15", "30", "45" }));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Am", "Pm" }));
+        timing.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Am", "Pm" }));
 
-        jButton2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton2.setText("Order");
+        orderbtn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        orderbtn.setText("Order");
+        orderbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderbtnActionPerformed(evt);
+            }
+        });
 
-        jButton14.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton14.setText("Make Reservation");
+        makeReservationbtn2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        makeReservationbtn2.setText("Make Reservation");
+        makeReservationbtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                makeReservationbtn2ActionPerformed(evt);
+            }
+        });
 
-        jButton15.setBackground(new java.awt.Color(255, 153, 102));
-        jButton15.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton15.setText("Cancel");
-        jButton15.setBorder(null);
+        cancelbtn.setBackground(new java.awt.Color(255, 153, 102));
+        cancelbtn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        cancelbtn.setText("Cancel");
+        cancelbtn.setBorder(null);
+        cancelbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelbtnActionPerformed(evt);
+            }
+        });
 
         jLabel21.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 36)); // NOI18N
         jLabel21.setText("Make Reservation");
@@ -1446,14 +1478,14 @@ public class CustomerFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(makeReservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(makeReservationPanelLayout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(hour, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(minutes, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(timing, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(guestAmount, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(569, 569, 569))
                     .addGroup(makeReservationPanelLayout.createSequentialGroup()
                         .addComponent(jLabel21)
@@ -1464,9 +1496,9 @@ public class CustomerFrame extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(makeReservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(orderbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cancelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(makeReservationbtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(54, 54, 54))))
         );
         makeReservationPanelLayout.setVerticalGroup(
@@ -1475,17 +1507,17 @@ public class CustomerFrame extends javax.swing.JFrame {
                 .addGroup(makeReservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(makeReservationPanelLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(makeReservationbtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(orderbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cancelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(makeReservationPanelLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
                         .addGroup(makeReservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(guestAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(27, 27, 27)
                         .addGroup(makeReservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1494,9 +1526,9 @@ public class CustomerFrame extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addGroup(makeReservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(hour, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(minutes, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(timing, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
@@ -1504,7 +1536,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                 .addGap(26, 26, 26))
         );
 
-        jPanel2.add(makeReservationPanel, "card3");
+        cardPages.add(makeReservationPanel, "card3");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1646,7 +1678,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        jPanel2.add(detailsPanel, "card5");
+        cardPages.add(detailsPanel, "card5");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel13.setText("Guest:");
@@ -1748,29 +1780,29 @@ public class CustomerFrame extends javax.swing.JFrame {
                 .addGap(60, 60, 60))
         );
 
-        jPanel2.add(reservationPanel, "card6");
+        cardPages.add(reservationPanel, "card6");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cardPages, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(cardPages, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+    private void guestAmountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_guestAmountKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1KeyTyped
+    }//GEN-LAST:event_guestAmountKeyTyped
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
         // TODO add your handling code here:
@@ -1792,56 +1824,280 @@ public class CustomerFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton30ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void makeReservationbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeReservationbtnActionPerformed
+        
+        this.cardPages.removeAll();
+        this.cardPages.add(makeReservationPanel);
+        this.cardPages.repaint();
+        this.cardPages.revalidate();
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CustomerFrame().setVisible(true);
+    }//GEN-LAST:event_makeReservationbtnActionPerformed
+
+    private void cancelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelbtnActionPerformed
+        
+        this.guestAmount.setText("");
+        this.date.setDate(null);
+        this.hour.setSelectedIndex(0);
+        this.minutes.setSelectedIndex(0);
+        this.timing.setSelectedIndex(0);
+        this.additionalDetails.setText("");
+
+        this.cardPages.removeAll();
+        this.cardPages.add(welcome);
+        this.cardPages.repaint();
+        this.cardPages.revalidate();
+
+    }//GEN-LAST:event_cancelbtnActionPerformed
+
+    private void orderbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderbtnActionPerformed
+        int amountOfGuest = 0;
+
+        try {
+            amountOfGuest = Integer.parseInt(this.guestAmount.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Please enter a valid number", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+
+            return;
+        }
+
+        if (amountOfGuest > 15) {
+            
+            JOptionPane.showMessageDialog(
+                null, 
+                "The maximum amount of guests is 15", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+
+            return;
+        }
+        
+        String meridiem = this.timing.getSelectedItem().toString();
+
+        int year = this.date.getCalendar().get(Calendar.YEAR);
+        int month = this.date.getCalendar().get(Calendar.MONTH) + 1;
+        int day = this.date.getCalendar().get(Calendar.DAY_OF_MONTH);
+        
+        int hour = Integer.parseInt(this.hour.getSelectedItem().toString());
+        int minute = Integer.parseInt(this.minutes.getSelectedItem().toString());
+
+        DateTimeFormatter ytf = DateTimeFormatter.ofPattern("yyyy");
+        DateTimeFormatter mtf = DateTimeFormatter.ofPattern("MM");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd");
+        DateTimeFormatter htf = DateTimeFormatter.ofPattern("hh");
+        DateTimeFormatter mntf = DateTimeFormatter.ofPattern("mm");
+        LocalDateTime now = LocalDateTime.now();
+
+        int currentYear = Integer.parseInt(ytf.format(now));
+        int currentMonth = Integer.parseInt(mtf.format(now));
+        int currentDay = Integer.parseInt(dtf.format(now));
+        int currentHour = Integer.parseInt(htf.format(now));
+        int currentMinute = Integer.parseInt(mntf.format(now));
+
+        if (year < currentYear || month < currentMonth || day < currentDay) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Please enter a valid date", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+
+            return;
+        }
+
+        if (meridiem.equals("Pm") && hour < 10 && minute > 30) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Sorry, we are closed/closing at this time", 
+                "Invalid Time", 
+                JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        if (meridiem.equals("Am") && hour < 10) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Sorry, we are closed at this time", 
+                "Invalid Time", 
+                JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        if (year == currentYear && 
+            month == currentMonth && 
+            day == currentDay) {
+            
+            if (hour < currentHour) {
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "Sorry, we are closed/closing at this time", 
+                    "Invalid Time", 
+                    JOptionPane.INFORMATION_MESSAGE);
+                return;
             }
-        });
-    }
+
+            if (currentHour == hour && currentMinute - minute < 20) {
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "Sorry, we do not allow reservations less than 20 minutes from now", 
+                    "Invalid Time", 
+                    JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+        }
+
+        int dialogResult = JOptionPane.showConfirmDialog(
+            null, 
+            "Are you sure you want to make a reservation?", 
+            "Confirmation", 
+            JOptionPane.YES_NO_OPTION);
+        
+        if (dialogResult == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        this.cardPages.removeAll();
+        this.cardPages.add(orderPanel);
+        this.cardPages.repaint();
+        this.cardPages.revalidate();
+
+    }//GEN-LAST:event_orderbtnActionPerformed
+
+    private void makeReservationbtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeReservationbtn2ActionPerformed
+        int amountOfGuest = 0;
+
+        try {
+            amountOfGuest = Integer.parseInt(this.guestAmount.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Please enter a valid number", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+
+            return;
+        }
+
+        if (amountOfGuest > 15) {
+            
+            JOptionPane.showMessageDialog(
+                null, 
+                "The maximum amount of guests is 15", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+
+            return;
+        }
+        
+        String meridiem = this.timing.getSelectedItem().toString();
+
+        int year = this.date.getCalendar().get(Calendar.YEAR);
+        int month = this.date.getCalendar().get(Calendar.MONTH) + 1;
+        int day = this.date.getCalendar().get(Calendar.DAY_OF_MONTH);
+        
+        int hour = Integer.parseInt(this.hour.getSelectedItem().toString());
+        int minute = Integer.parseInt(this.minutes.getSelectedItem().toString());
+
+        DateTimeFormatter ytf = DateTimeFormatter.ofPattern("yyyy");
+        DateTimeFormatter mtf = DateTimeFormatter.ofPattern("MM");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd");
+        DateTimeFormatter htf = DateTimeFormatter.ofPattern("hh");
+        DateTimeFormatter mntf = DateTimeFormatter.ofPattern("mm");
+        LocalDateTime now = LocalDateTime.now();
+
+        int currentYear = Integer.parseInt(ytf.format(now));
+        int currentMonth = Integer.parseInt(mtf.format(now));
+        int currentDay = Integer.parseInt(dtf.format(now));
+        int currentHour = Integer.parseInt(htf.format(now));
+        int currentMinute = Integer.parseInt(mntf.format(now));
+
+        if (year < currentYear || month < currentMonth || day < currentDay) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Please enter a valid date", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+
+            return;
+        }
+
+        if (meridiem.equals("Pm") && hour < 10 && minute > 30) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Sorry, we are closed/closing at this time", 
+                "Invalid Time", 
+                JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        if (meridiem.equals("Am") && hour < 10) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Sorry, we are closed at this time", 
+                "Invalid Time", 
+                JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        if (year == currentYear && 
+            month == currentMonth && 
+            day == currentDay) {
+            
+            if (hour < currentHour) {
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "Sorry, we are closed/closing at this time", 
+                    "Invalid Time", 
+                    JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+            if (currentHour == hour && currentMinute - minute < 20) {
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "Sorry, we do not allow reservations less than 20 minutes from now", 
+                    "Invalid Time", 
+                    JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+        }
+
+        int dialogResult = JOptionPane.showConfirmDialog(
+            null, 
+            "Are you sure you want to make a reservation?", 
+            "Confirmation", 
+            JOptionPane.YES_NO_OPTION);
+        
+        if (dialogResult == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        this.cardPages.removeAll();
+        this.cardPages.add(detailsPanel);
+        this.cardPages.repaint();
+        this.cardPages.revalidate();
+
+    }//GEN-LAST:event_makeReservationbtn2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea additionalDetails;
+    private javax.swing.JButton cancelbtn;
+    private javax.swing.JPanel cardPages;
     private com.toedter.calendar.JDateChooser date;
     private javax.swing.JPanel detailsPanel;
+    private javax.swing.JLabel greet;
+    private javax.swing.JTextField guestAmount;
+    private javax.swing.JComboBox<String> hour;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
@@ -1866,9 +2122,6 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
@@ -1909,7 +2162,6 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1995,7 +2247,6 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel98;
     private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -2011,17 +2262,20 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JPanel makeReservationPanel;
+    private javax.swing.JButton makeReservationbtn;
+    private javax.swing.JButton makeReservationbtn2;
+    private javax.swing.JComboBox<String> minutes;
     private javax.swing.JPanel orderPanel;
+    private javax.swing.JButton orderbtn;
     private javax.swing.JPanel reservationPanel;
+    private javax.swing.JComboBox<String> timing;
     private javax.swing.JPanel welcome;
     // End of variables declaration//GEN-END:variables
 }

@@ -179,11 +179,11 @@ public class SignInDialog extends java.awt.Dialog {
 
             Customer customer = new Customer(username, password, user_id);
 
-            System.out.println("Sign in as " + customer.getName());
-            System.err.println("User ID: " + customer.getId());
-            System.out.println("User Password: " + customer.getPassword());
+            CustomerFrame customerFrame = new CustomerFrame( customer );
+            customerFrame.setVisible(true);
 
-            System.exit(0);
+            setVisible(false);
+            dispose();
 
     }//GEN-LAST:event_signInActionPerformed
 
