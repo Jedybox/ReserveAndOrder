@@ -10,6 +10,16 @@
         <maven.compiler.release>23</maven.compiler.release>
         <exec.mainClass>com.jedykerby.reserveandorder.Main</exec.mainClass>
     </properties>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.jpg</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
     <dependencies>
         <dependency>
             <groupId>org.xerial</groupId>
