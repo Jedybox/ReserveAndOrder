@@ -26,6 +26,11 @@ public abstract class Food {
     public double getPrice() {
         return price;
     }
+    
+    public void setPrice(double p) {
+        this.price = p;
+    }
+    
 
     public int getQuantity() {
         return quantity;

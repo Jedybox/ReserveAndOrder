@@ -24,7 +24,7 @@ public class Order {
                 return;
             }
         }
-
+        appitizer.addQuantity(amount);
         appitizers.add(appitizer);
     }
 
@@ -36,7 +36,7 @@ public class Order {
                 return;
             }
         }
-
+        mainCourse.addQuantity(amount);
         mainCourses.add(mainCourse);
     }
 
@@ -48,7 +48,7 @@ public class Order {
                 return;
             }
         }
-
+        dessert.addQuantity(amount);
         desserts.add(dessert);
     }
 
@@ -61,7 +61,7 @@ public class Order {
                 return;
             }
         }
-
+        drink.addQuantity(amount);
         drinks.add(drink);
     }
     

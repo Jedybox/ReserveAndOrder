@@ -83,6 +83,8 @@ public class PreOrderItemPanel extends javax.swing.JPanel {
         jButton17 = new javax.swing.JButton();
         price = new javax.swing.JLabel();
 
+        setOpaque(false);
+
         name.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         name.setText("itemName");
 
@@ -140,9 +142,7 @@ public class PreOrderItemPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(icon)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(icon)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(name)
                         .addGap(18, 18, 18)
@@ -152,9 +152,9 @@ public class PreOrderItemPanel extends javax.swing.JPanel {
                             .addComponent(amount)
                             .addComponent(add)
                             .addComponent(minus))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                        .addComponent(jButton17)
-                        .addGap(58, 58, 58))))
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton17)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
