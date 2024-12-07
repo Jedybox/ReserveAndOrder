@@ -191,7 +191,6 @@ public class DatabaseManager {
                 // Parse the date and time
                 LocalDate now = LocalDate.now();
                 LocalDate date = LocalDate.parse(dateString, dFormatter);
-                LocalTime time = LocalTime.parse(timeString, tFormatter);
 
                 if (now.isAfter(date)) {
                     stmt.execute(deleteSQL); // Delete if the date is in the past
