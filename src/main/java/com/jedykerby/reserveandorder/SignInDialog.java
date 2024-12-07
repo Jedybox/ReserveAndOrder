@@ -143,11 +143,14 @@ public class SignInDialog extends java.awt.Dialog {
      */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
         
-        WelcomeDialog welcomeDialog = new WelcomeDialog(null, false);
-        welcomeDialog.setVisible(true);
+        int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
 
-        setVisible(false);
-        dispose();
+        if (response == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        } else {
+            return;
+        }
+        
     }//GEN-LAST:event_closeDialog
 
     private void signUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpActionPerformed

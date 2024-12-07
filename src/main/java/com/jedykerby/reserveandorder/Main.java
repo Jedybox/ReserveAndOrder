@@ -13,7 +13,7 @@ package com.jedykerby.reserveandorder;
 public class Main {
     
     public static void main(String[] args) {
-        WelcomeDialog wcdialog = new WelcomeDialog(null, false);
-        wcdialog.setVisible(true);
+        SignInDialog dialog = new SignInDialog(null, false);
+        dialog.setVisible(true);
     }    
 }

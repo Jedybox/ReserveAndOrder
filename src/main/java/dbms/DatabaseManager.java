@@ -15,7 +15,7 @@ import java.sql.SQLException;
 
 public class DatabaseManager {
     
-    static String url = "jdbc:sqlite:main.db"; 
+    private static String url = "jdbc:sqlite:main.db"; 
     
     public static int getUserId(String name) {
         String selectSQL = "SELECT id FROM customers WHERE name = '" + name + "';";
@@ -193,17 +193,9 @@ public class DatabaseManager {
                 LocalDate date = LocalDate.parse(dateString, dFormatter);
                 LocalTime time = LocalTime.parse(timeString, tFormatter);
 
-                if (!now.isBefore(date)) {
+                if (now.isAfter(date)) {
                     stmt.execute(deleteSQL); // Delete if the date is in the past
                     return false;
-                }
-
-                if (now.isEqual(date)) { // If the date is today
-                    LocalTime nowTime = LocalTime.now();
-                    if (!nowTime.isBefore(time)) {
-                        stmt.execute(deleteSQL); // Delete if the time is in the past
-                        return false;
-                    }
                 }
 
                 return true; // Otherwise, the date-time is valid

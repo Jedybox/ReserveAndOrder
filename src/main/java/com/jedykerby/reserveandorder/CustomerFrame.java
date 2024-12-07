@@ -3165,6 +3165,15 @@ public class CustomerFrame extends javax.swing.JFrame {
             return;
         }
 
+        if (now.isEqual(date) && LocalTime.now().isAfter(time)) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Sorry, you cannot cancel a reservation that has already passed" +
+                "\nPlease contact the restaurant for further assistance.", 
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel your reservation?", "Confirmation", JOptionPane.YES_NO_OPTION);
 
         if (dialogResult != JOptionPane.YES_OPTION) {
@@ -3172,7 +3181,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         }
 
         if (this.payment > 0) {
-            JOptionPane.showMessageDialog(this, "You have successfully cancelled your reservation. Your payment of PHP" + this.payment + " will be refunded to you.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "You have successfully cancelled your reservation.\nYour payment of PHP" + this.payment + " will be refunded to you.", "Success", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "You have successfully cancelled your reservation.", "Success", JOptionPane.INFORMATION_MESSAGE);
         }
