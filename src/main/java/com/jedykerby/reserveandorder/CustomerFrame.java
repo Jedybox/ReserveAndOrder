@@ -9,16 +9,19 @@ import foodclasses.Dessert;
 import foodclasses.Drink;
 import foodclasses.MainCourse;
 import foodclasses.Order;
+
 import java.text.SimpleDateFormat;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import dbms.DatabaseManager;
 import users.Customer;
 
 /**
@@ -33,12 +36,25 @@ public class CustomerFrame extends javax.swing.JFrame {
 
     Customer customer ;
     Order orders = new Order();
+    double payment;
     
     public CustomerFrame(Customer customer) {
         initComponents();
         setLocationRelativeTo(null);
         this.customer = customer;
         this.greet.setText("Hi, " + customer.getName());
+        
+        if (!DatabaseManager.hasReservation(customer)) {
+            return;
+        }
+
+        this.renderReservation();
+
+        this.cardPages.removeAll();
+        this.cardPages.add(this.reservationPanel);
+        this.cardPages.revalidate();
+        this.cardPages.repaint();
+        
     }
     
     public void renderOrders() {
@@ -241,7 +257,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         date = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
-        hour = new javax.swing.JComboBox<>();
+        hours = new javax.swing.JComboBox<>();
         minutes = new javax.swing.JComboBox<>();
         timing = new javax.swing.JComboBox<>();
         orderbtn = new javax.swing.JButton();
@@ -267,13 +283,12 @@ public class CustomerFrame extends javax.swing.JFrame {
         cancelbtn1 = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         reservationPanel = new javax.swing.JPanel();
-        guestname = new javax.swing.JLabel();
         finalDate = new javax.swing.JLabel();
         finaltime = new javax.swing.JLabel();
         finalamount = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        reservationNumber = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         finaldetails = new javax.swing.JTextArea();
         jButton13 = new javax.swing.JButton();
@@ -1587,7 +1602,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
         jLabel6.setText("Time:");
 
-        hour.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", " " }));
+        hours.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", " " }));
 
         minutes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45" }));
 
@@ -1637,7 +1652,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(makeReservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(makeReservationPanelLayout.createSequentialGroup()
-                                .addComponent(hour, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(hours, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)
                                 .addComponent(minutes, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1685,7 +1700,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addGroup(makeReservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(hour, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hours, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(minutes, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(timing, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
@@ -1869,9 +1884,6 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         cardPages.add(detailsPanel, "card5");
 
-        guestname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        guestname.setText("Guest:");
-
         finalDate.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         finalDate.setText("Date:");
 
@@ -1885,10 +1897,10 @@ public class CustomerFrame extends javax.swing.JFrame {
         jLabel17.setText("Your additional details:");
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel18.setText("Reservation Number");
+        jLabel18.setText("Reservation Number:");
 
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel19.setText("--NUMBER--");
+        reservationNumber.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        reservationNumber.setText("--NUMBER--");
 
         finaldetails.setEditable(false);
         finaldetails.setColumns(20);
@@ -1927,22 +1939,18 @@ public class CustomerFrame extends javax.swing.JFrame {
                     .addGroup(reservationPanelLayout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(reservationNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(reservationPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(reservationPanelLayout.createSequentialGroup()
-                                .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(reservationPanelLayout.createSequentialGroup()
-                                        .addComponent(finalDate, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(finaltime, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel17)
-                                    .addComponent(finalamount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(guestname, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 61, Short.MAX_VALUE))
-                            .addComponent(jScrollPane5)))
+                                .addComponent(finalDate, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(finaltime, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel17)
+                            .addComponent(finalamount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 57, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5)
                     .addGroup(reservationPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1956,8 +1964,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(reservationPanelLayout.createSequentialGroup()
-                        .addComponent(guestname)
-                        .addGap(13, 13, 13)
+                        .addGap(38, 38, 38)
                         .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(finalDate)
                             .addComponent(finaltime))
@@ -1971,7 +1978,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(reservationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(jLabel19)
+                    .addComponent(reservationNumber)
                     .addComponent(jButton13))
                 .addGap(60, 60, 60))
         );
@@ -2171,7 +2178,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                     mc.setVariant("COLD");
                 }
                 case 3 -> {
-                    size = 12;
+                    size = 16;
                     mc.setPrice(100);
                     mc.setVariant("COLD");
                 }
@@ -2279,7 +2286,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                     mc.setVariant("COLD");
                 }
                 case 3 -> {
-                    size = 12;
+                    size = 16;
                     mc.setPrice(100);
                     mc.setVariant("COLD");
                 }
@@ -2315,7 +2322,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         
         this.guestAmount.setText("");
         this.date.setDate(null);
-        this.hour.setSelectedIndex(0);
+        this.hours.setSelectedIndex(0);
         this.minutes.setSelectedIndex(0);
         this.timing.setSelectedIndex(0);
         this.additionalDetails.setText("");
@@ -2334,7 +2341,7 @@ public class CustomerFrame extends javax.swing.JFrame {
             amountOfGuest = Integer.parseInt(this.guestAmount.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(
-                null, 
+                this, 
                 "Please enter a valid number", 
                 "Error", 
                 JOptionPane.ERROR_MESSAGE);
@@ -2345,7 +2352,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         if (amountOfGuest > 15) {
             
             JOptionPane.showMessageDialog(
-                null, 
+                this, 
                 "The maximum amount of guests is 15", 
                 "Error", 
                 JOptionPane.ERROR_MESSAGE);
@@ -2369,7 +2376,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         int month = this.date.getCalendar().get(Calendar.MONTH) + 1;
         int day = this.date.getCalendar().get(Calendar.DAY_OF_MONTH);
         
-        int hour = Integer.parseInt(this.hour.getSelectedItem().toString());
+        int hour = Integer.parseInt(this.hours.getSelectedItem().toString());
         int minute = Integer.parseInt(this.minutes.getSelectedItem().toString());
 
         DateTimeFormatter ytf = DateTimeFormatter.ofPattern("yyyy");
@@ -2485,7 +2492,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         int month = this.date.getCalendar().get(Calendar.MONTH) + 1;
         int day = this.date.getCalendar().get(Calendar.DAY_OF_MONTH);
         
-        int hour = Integer.parseInt(this.hour.getSelectedItem().toString());
+        int hour = Integer.parseInt(this.hours.getSelectedItem().toString());
         int minute = Integer.parseInt(this.minutes.getSelectedItem().toString());
 
         DateTimeFormatter ytf = DateTimeFormatter.ofPattern("yyyy");
@@ -2561,9 +2568,36 @@ public class CustomerFrame extends javax.swing.JFrame {
         if (dialogResult != JOptionPane.YES_OPTION) {
             return;
         }
-
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("MMM d, yyyy");
+        
+        String receipt = """
+                         ORDERS
+                         =======================================
+                         <--NO-ORDERS-->
+                         =======================================
+                         """;
+        
+        
+        
+        String time  =  this.hours.getSelectedItem().toString() + ":" +
+                        this.minutes.getSelectedItem().toString() + "" +
+                        this.timing.getSelectedItem().toString();
+                        
+        DatabaseManager.addReservation(
+                customer,
+                receipt,
+                this.additionalDetails.getText(),
+                amountOfGuest,
+                formatter.format(this.date.getDate()),
+                time,
+                0
+        );
+        
+        this.renderReservation();
+        
         this.cardPages.removeAll();
-        this.cardPages.add(detailsPanel);
+        this.cardPages.add(reservationPanel);
         this.cardPages.repaint();
         this.cardPages.revalidate();
 
@@ -3033,7 +3067,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         this.amountGuest.setText(this.guestAmount.getText());
         this.datetext.setText(formatter.format(date.getDate()));
         this.timetext.setText(
-                this.hour.getSelectedItem().toString() + ":" + 
+                this.hours.getSelectedItem().toString() + ":" + 
                 this.minutes.getSelectedItem().toString() + " " +
                 this.timing.getSelectedItem().toString());
         this.detailstext.setText(this.additionalDetails.getText());
@@ -3104,11 +3138,12 @@ public class CustomerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_changeorderbtnActionPerformed
 
     private void applyReservationbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyReservationbtnActionPerformed
-        double n, change;
+        double n = 0, change;
+        SimpleDateFormat formatter = new SimpleDateFormat("MMM d, yyyy");
         
         String receipt =    """
                             ORDER
-                            =================================""";
+                            =======================================""";
         
         if (this.orders.getTotal() > 0) {
             
@@ -3141,34 +3176,49 @@ public class CustomerFrame extends javax.swing.JFrame {
                 return;
             }
             
-            change = orders.getTotal() - n;
+            change = n - orders.getTotal();
             
             for (MainCourse mc: orders.getMainCourses()) 
-                receipt += "\n" + mc.getName() + "\t" + mc.getQuantity() + "\t" + mc.getPrice() ;
+                receipt += "\n" + mc.getQuantity() +  " "+ mc.getName()  + "\t" + mc.getPrice() ;
             
             for (Appitizer ap: orders.getAppitizers())
-                receipt += "\n" +  ap.getName() + "\t" + ap.getQuantity() + "\t" + ap.getPrice();
+                receipt += "\n" + ap.getQuantity() + " " + ap.getName() + "\t" + ap.getPrice();
             
             for (Dessert ds: orders.getDesserts())
-                receipt += "\n" +  ds.getName() + "\t" + ds.getQuantity() + "\t" + ds.getPrice();
+                receipt += "\n" + ds.getQuantity() + " " +  ds.getName()  + "\t" + ds.getPrice();
             
             for (Drink dr: orders.getDrinks()) 
-                receipt += dr.getName() + " ("+ dr.getVariant()+ ") - " + dr.getSize() +"oz" + "\t" + dr.getQuantity() + "\t" + dr.getPrice();
+                receipt += "\n" + dr.getQuantity() + " " + dr.getName() + " "+ dr.getVariant()+ " - " + dr.getSize() +"oz" + "\t" + dr.getPrice();
             
-            receipt +=  """
-                        
-                        =================================
-                        Total: PHP """ + orders.getTotal() +
+            receipt += """
+                       
+                       =======================================
+                       Total: PHP""" + orders.getTotal() +
                         "\nPayment: PHP" + n +
                         "\nChange: PHP" + change;
         } else {
             receipt += """
                        --NO ORDER--
-                       =================================""";
+                       =======================================""";
         }
         
-        recieptArea.setText(receipt);
+        String time =   this.hours.getSelectedItem().toString() +":"+
+                        this.minutes.getSelectedItem().toString() +" "+
+                        this.timing.getSelectedItem().toString();
         
+        
+        DatabaseManager.addReservation(
+                customer,
+                receipt,
+                this.additionalDetails.getText(),
+                Integer.parseInt(this.amountGuest.getText()),
+                formatter.format(this.date.getDate()),
+                time,
+                n
+        );
+        
+        this.renderReservation();
+
         this.cardPages.removeAll();
         this.cardPages.add(reservationPanel);
         this.cardPages.revalidate();
@@ -3188,7 +3238,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         
         this.guestAmount.setText("");
         this.date.setDate(null);
-        this.hour.setSelectedIndex(0);
+        this.hours.setSelectedIndex(0);
         this.minutes.setSelectedIndex(0);
         this.timing.setSelectedIndex(0);
         this.additionalDetails.setText("");
@@ -3200,7 +3250,17 @@ public class CustomerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelbtn1ActionPerformed
     
     private void renderReservation() {
+        ArrayList<Object> reservation = DatabaseManager.getReservation(customer);
         
+        this.recieptArea.setText(reservation.get(0).toString());
+        this.finaldetails.setText(reservation.get(1).toString());
+        this.finalamount.setText("Your additional details: "+reservation.get(2).toString());
+        this.finalDate.setText("Date: " +reservation.get(3).toString());
+        this.finaltime.setText("Time: " +reservation.get(4).toString());
+        this.reservationNumber.setText(reservation.get(5).toString());
+        this.payment = Double.parseDouble(reservation.get(6).toString());
+        
+        System.out.print(this.payment);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -3233,8 +3293,7 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JButton friesbtn;
     private javax.swing.JLabel greet;
     private javax.swing.JTextField guestAmount;
-    private javax.swing.JLabel guestname;
-    private javax.swing.JComboBox<String> hour;
+    private javax.swing.JComboBox<String> hours;
     private javax.swing.JButton icedTeabtn;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton31;
@@ -3275,7 +3334,6 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel125;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -3394,6 +3452,7 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JButton ordersbtn;
     private javax.swing.JButton parmesantbn;
     private javax.swing.JTextArea recieptArea;
+    private javax.swing.JLabel reservationNumber;
     private javax.swing.JPanel reservationPanel;
     private javax.swing.JButton resetpreoredrbtn;
     private javax.swing.JButton salmonbtn;

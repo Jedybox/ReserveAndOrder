@@ -12,7 +12,7 @@ public class Drink extends Food{
     }
     
     public void setVariant(String v) {
-        this.variant = v;
+        this.variant = "("+v+")";
     }
     
     public String getVariant() {

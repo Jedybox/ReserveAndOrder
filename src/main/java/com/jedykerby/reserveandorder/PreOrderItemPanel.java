@@ -60,7 +60,7 @@ public class PreOrderItemPanel extends javax.swing.JPanel {
         initComponents();
         this.parent = parent;
         this.dr = dr;
-        this.name.setText(dr.getName() + " - ("+dr.getVariant()+") " + dr.getSize() + "oz");
+        this.name.setText(dr.getName() + " - "+dr.getVariant()+" " + dr.getSize() + "oz");
         this.icon.setIcon(dr.getImage());
         this.amount.setText("Amount: "+dr.getQuantity());
         this.price.setText("Price: PHP "+dr.getPrice());
@@ -111,6 +111,11 @@ public class PreOrderItemPanel extends javax.swing.JPanel {
 
         jButton17.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jButton17.setText("Delete");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
 
         price.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         price.setText("price");
@@ -183,6 +188,19 @@ public class PreOrderItemPanel extends javax.swing.JPanel {
         
         this.parent.renderOrders();
     }//GEN-LAST:event_minusActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        if (mc != null) 
+            this.parent.orders.remove(mc);
+        else if (ap != null)
+            this.parent.orders.remove(ap);
+        else if (ds != null)
+            this.parent.orders.remove(ds);
+        else if (dr != null)
+            this.parent.orders.remove(dr);
+        
+        this.parent.renderOrders();
+    }//GEN-LAST:event_jButton17ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
