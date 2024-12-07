@@ -174,32 +174,32 @@ public class CustomerFrame extends javax.swing.JFrame {
         jLabel103 = new javax.swing.JLabel();
         jLabel104 = new javax.swing.JLabel();
         jLabel105 = new javax.swing.JLabel();
-        jButton31 = new javax.swing.JButton();
+        cheesecakebtn = new javax.swing.JButton();
         jLabel106 = new javax.swing.JLabel();
         jLabel107 = new javax.swing.JLabel();
         jLabel108 = new javax.swing.JLabel();
         jLabel109 = new javax.swing.JLabel();
-        jButton32 = new javax.swing.JButton();
+        tiramasubtn = new javax.swing.JButton();
         jLabel110 = new javax.swing.JLabel();
         jLabel111 = new javax.swing.JLabel();
         jLabel112 = new javax.swing.JLabel();
         jLabel113 = new javax.swing.JLabel();
-        jButton33 = new javax.swing.JButton();
+        clavacakebtn = new javax.swing.JButton();
         jLabel114 = new javax.swing.JLabel();
         jLabel115 = new javax.swing.JLabel();
         jLabel116 = new javax.swing.JLabel();
         jLabel117 = new javax.swing.JLabel();
-        jButton34 = new javax.swing.JButton();
+        carrotcakebtn = new javax.swing.JButton();
         jLabel118 = new javax.swing.JLabel();
         jLabel119 = new javax.swing.JLabel();
         jLabel120 = new javax.swing.JLabel();
         jLabel121 = new javax.swing.JLabel();
-        jButton35 = new javax.swing.JButton();
+        sundaebtn = new javax.swing.JButton();
         jLabel122 = new javax.swing.JLabel();
         jLabel123 = new javax.swing.JLabel();
         jLabel124 = new javax.swing.JLabel();
         jLabel125 = new javax.swing.JLabel();
-        jButton36 = new javax.swing.JButton();
+        churrosbtn = new javax.swing.JButton();
         drinksMenu = new javax.swing.JScrollPane();
         jPanel6 = new javax.swing.JPanel();
         jLabel74 = new javax.swing.JLabel();
@@ -646,6 +646,8 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         maincoursesMenu.setViewportView(jPanel4);
 
+        maincoursesMenu.getVerticalScrollBar().setUnitIncrement(16);
+
         menucards.add(maincoursesMenu, "card2");
 
         appetizersMenu.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -914,7 +916,11 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         appetizersMenu.setViewportView(jPanel5);
 
+        appetizersMenu.getVerticalScrollBar().setUnitIncrement(16);
+
         menucards.add(appetizersMenu, "card3");
+
+        dessertMenu.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jLabel93.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/classiccheesecake.jpg"))); // NOI18N
 
@@ -927,8 +933,13 @@ public class CustomerFrame extends javax.swing.JFrame {
         jLabel105.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel105.setText("Price: PHP 150");
 
-        jButton31.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton31.setText("Order");
+        cheesecakebtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cheesecakebtn.setText("Order");
+        cheesecakebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cheesecakebtnActionPerformed(evt);
+            }
+        });
 
         jLabel106.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tiramisu.jpg"))); // NOI18N
 
@@ -941,8 +952,13 @@ public class CustomerFrame extends javax.swing.JFrame {
         jLabel109.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel109.setText("Tiramisu");
 
-        jButton32.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton32.setText("Order");
+        tiramasubtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tiramasubtn.setText("Order");
+        tiramasubtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tiramasubtnActionPerformed(evt);
+            }
+        });
 
         jLabel110.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LavaCake.jpg"))); // NOI18N
 
@@ -955,8 +971,13 @@ public class CustomerFrame extends javax.swing.JFrame {
         jLabel113.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel113.setText("Price: PHP 150");
 
-        jButton33.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton33.setText("Order");
+        clavacakebtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        clavacakebtn.setText("Order");
+        clavacakebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clavacakebtnActionPerformed(evt);
+            }
+        });
 
         jLabel114.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CarrotCake.jpg"))); // NOI18N
 
@@ -969,8 +990,13 @@ public class CustomerFrame extends javax.swing.JFrame {
         jLabel117.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel117.setText("Carrot Cake");
 
-        jButton34.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton34.setText("Order");
+        carrotcakebtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        carrotcakebtn.setText("Order");
+        carrotcakebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                carrotcakebtnActionPerformed(evt);
+            }
+        });
 
         jLabel118.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel118.setText("Price: PHP 100");
@@ -983,8 +1009,13 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         jLabel121.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Sundae.jpg"))); // NOI18N
 
-        jButton35.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton35.setText("Order");
+        sundaebtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        sundaebtn.setText("Order");
+        sundaebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sundaebtnActionPerformed(evt);
+            }
+        });
 
         jLabel122.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel122.setText("Churros ");
@@ -997,8 +1028,13 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         jLabel125.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Churros.jpg"))); // NOI18N
 
-        jButton36.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton36.setText("Order");
+        churrosbtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        churrosbtn.setText("Order");
+        churrosbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                churrosbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -1019,7 +1055,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel105)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton31))
+                                .addComponent(cheesecakebtn))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel109)
@@ -1038,11 +1074,11 @@ public class CustomerFrame extends javax.swing.JFrame {
                                     .addGroup(jPanel7Layout.createSequentialGroup()
                                         .addComponent(jLabel113)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton33))
+                                        .addComponent(clavacakebtn))
                                     .addGroup(jPanel7Layout.createSequentialGroup()
                                         .addComponent(jLabel107)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton32))
+                                        .addComponent(tiramasubtn))
                                     .addGroup(jPanel7Layout.createSequentialGroup()
                                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel111)
@@ -1054,7 +1090,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                                     .addGroup(jPanel7Layout.createSequentialGroup()
                                         .addComponent(jLabel115)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton34))
+                                        .addComponent(carrotcakebtn))
                                     .addGroup(jPanel7Layout.createSequentialGroup()
                                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel120)
@@ -1076,11 +1112,11 @@ public class CustomerFrame extends javax.swing.JFrame {
                                             .addComponent(jLabel123)
                                             .addComponent(jLabel124))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                                .addComponent(jButton36))
+                                .addComponent(churrosbtn))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel121)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton35)))))
+                                .addComponent(sundaebtn)))))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -1095,7 +1131,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel105)
-                            .addComponent(jButton31)))
+                            .addComponent(cheesecakebtn)))
                     .addComponent(jLabel93))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1106,7 +1142,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel107)
-                            .addComponent(jButton32)))
+                            .addComponent(tiramasubtn)))
                     .addComponent(jLabel106))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1117,7 +1153,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel113)
-                            .addComponent(jButton33)))
+                            .addComponent(clavacakebtn)))
                     .addComponent(jLabel110))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1128,7 +1164,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel115)
-                            .addComponent(jButton34)))
+                            .addComponent(carrotcakebtn)))
                     .addComponent(jLabel114))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1139,7 +1175,7 @@ public class CustomerFrame extends javax.swing.JFrame {
                         .addComponent(jLabel119)
                         .addGap(118, 118, 118)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton35)
+                            .addComponent(sundaebtn)
                             .addComponent(jLabel118))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1151,13 +1187,17 @@ public class CustomerFrame extends javax.swing.JFrame {
                         .addGap(115, 115, 115)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel124)
-                            .addComponent(jButton36))))
+                            .addComponent(churrosbtn))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
         dessertMenu.setViewportView(jPanel7);
 
+        dessertMenu.getVerticalScrollBar().setUnitIncrement(16);
+
         menucards.add(dessertMenu, "card5");
+
+        drinksMenu.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jLabel74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lemon-iced-tea.jpg"))); // NOI18N
 
@@ -1448,8 +1488,12 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         menucards.add(drinksMenu, "card4");
 
+        jScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         orderlistPanel.setLayout(new java.awt.GridLayout(0, 1));
         jScrollPane.setViewportView(orderlistPanel);
+
+        drinksMenu.getVerticalScrollBar().setUnitIncrement(16);
 
         cancel.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         cancel.setText("Cancel");
@@ -3194,6 +3238,212 @@ public class CustomerFrame extends javax.swing.JFrame {
         this.cardPages.repaint();
 
     }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void cheesecakebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cheesecakebtnActionPerformed
+        
+        ImageIcon icon = new ImageIcon(getClass().getResource("/images/classiccheesecake.jpg"));
+        Appitizer ap = new Appitizer(icon ,"Cheesecake", 150);
+
+        String amount = JOptionPane.showInputDialog(
+            this, 
+            "Enter the amount of "+ap.getName()+" you want to order", 
+            "Order", 
+            JOptionPane.QUESTION_MESSAGE);
+        
+        if (amount == null) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Please enter a valid number", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try {
+            int amountOfWings = Integer.parseInt(amount);
+            this.orders.add(ap, amountOfWings);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Please enter a valid number", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        this.renderOrders();
+        
+    }//GEN-LAST:event_cheesecakebtnActionPerformed
+
+    private void tiramasubtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiramasubtnActionPerformed
+        ImageIcon icon = new ImageIcon(getClass().getResource("/images/Tiramisu.jpg"));
+        Appitizer ap = new Appitizer(icon ,"Tiramisu", 170);
+
+        String amount = JOptionPane.showInputDialog(
+            this, 
+            "Enter the amount of "+ap.getName()+" you want to order", 
+            "Order", 
+            JOptionPane.QUESTION_MESSAGE);
+        
+        if (amount == null) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Please enter a valid number", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try {
+            int amountOfWings = Integer.parseInt(amount);
+            this.orders.add(ap, amountOfWings);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Please enter a valid number", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        this.renderOrders();
+    }//GEN-LAST:event_tiramasubtnActionPerformed
+
+    private void clavacakebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clavacakebtnActionPerformed
+        ImageIcon icon = new ImageIcon(getClass().getResource("/images/LavaCake.jpg"));
+        Appitizer ap = new Appitizer(icon ,"Chocolate Lava Cake", 150);
+
+        String amount = JOptionPane.showInputDialog(
+            this, 
+            "Enter the amount of "+ap.getName()+" you want to order", 
+            "Order", 
+            JOptionPane.QUESTION_MESSAGE);
+        
+        if (amount == null) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Please enter a valid number", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try {
+            int amountOfWings = Integer.parseInt(amount);
+            this.orders.add(ap, amountOfWings);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Please enter a valid number", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        this.renderOrders();
+    }//GEN-LAST:event_clavacakebtnActionPerformed
+
+    private void carrotcakebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carrotcakebtnActionPerformed
+        ImageIcon icon = new ImageIcon(getClass().getResource("/images/CarrotCake.jpg"));
+        Appitizer ap = new Appitizer(icon, "Carrot Cake", 100);
+
+        String amount = JOptionPane.showInputDialog(
+            this, 
+            "Enter the amount of "+ap.getName()+" you want to order", 
+            "Order", 
+            JOptionPane.QUESTION_MESSAGE);
+        
+        if (amount == null) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Please enter a valid number", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try {
+            int amountOfWings = Integer.parseInt(amount);
+            this.orders.add(ap, amountOfWings);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Please enter a valid number", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        this.renderOrders();
+    }//GEN-LAST:event_carrotcakebtnActionPerformed
+
+    private void sundaebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sundaebtnActionPerformed
+        ImageIcon icon = new ImageIcon(getClass().getResource("/images/Sundae.jpg"));
+        Appitizer ap = new Appitizer(icon, "Ice Creame Sundae", 100);
+
+        String amount = JOptionPane.showInputDialog(
+            this, 
+            "Enter the amount of "+ap.getName()+" you want to order", 
+            "Order", 
+            JOptionPane.QUESTION_MESSAGE);
+        
+        if (amount == null) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Please enter a valid number", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try {
+            int amountOfWings = Integer.parseInt(amount);
+            this.orders.add(ap, amountOfWings);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Please enter a valid number", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        this.renderOrders();
+    }//GEN-LAST:event_sundaebtnActionPerformed
+
+    private void churrosbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_churrosbtnActionPerformed
+        ImageIcon icon = new ImageIcon(getClass().getResource("/images/Churros.jpg"));
+        Appitizer ap = new Appitizer(icon, "Churros", 100);
+
+        String amount = JOptionPane.showInputDialog(
+            this, 
+            "Enter the amount of "+ap.getName()+" you want to order", 
+            "Order", 
+            JOptionPane.QUESTION_MESSAGE);
+        
+        if (amount == null) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Please enter a valid number", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try {
+            int amountOfWings = Integer.parseInt(amount);
+            this.orders.add(ap, amountOfWings);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                this, 
+                "Please enter a valid number", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        this.renderOrders();
+    }//GEN-LAST:event_churrosbtnActionPerformed
     
     private void renderReservation() {
         ArrayList<Object> reservation = DatabaseManager.getReservation(customer);
@@ -3220,8 +3470,12 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JButton cancelbtn1;
     private javax.swing.JButton carbonarabtn;
     private javax.swing.JPanel cardPages;
+    private javax.swing.JButton carrotcakebtn;
     private javax.swing.JButton changeorderbtn;
+    private javax.swing.JButton cheesecakebtn;
     private javax.swing.JButton chocobtn;
+    private javax.swing.JButton churrosbtn;
+    private javax.swing.JButton clavacakebtn;
     private javax.swing.JButton coffeebtn;
     private com.toedter.calendar.JDateChooser date;
     private javax.swing.JTextField datetext;
@@ -3241,12 +3495,6 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> hours;
     private javax.swing.JButton icedTeabtn;
     private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton31;
-    private javax.swing.JButton jButton32;
-    private javax.swing.JButton jButton33;
-    private javax.swing.JButton jButton34;
-    private javax.swing.JButton jButton35;
-    private javax.swing.JButton jButton36;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
@@ -3404,10 +3652,12 @@ public class CustomerFrame extends javax.swing.JFrame {
     private javax.swing.JButton setpreorderbtn;
     private javax.swing.JButton slidersbtn;
     private javax.swing.JButton stakebtn;
+    private javax.swing.JButton sundaebtn;
     private javax.swing.JTable tableOrderDetail;
     private javax.swing.JButton tempurabtn;
     private javax.swing.JTextField timetext;
     private javax.swing.JComboBox<String> timing;
+    private javax.swing.JButton tiramasubtn;
     private javax.swing.JLabel total;
     private javax.swing.JPanel welcome;
     // End of variables declaration//GEN-END:variables

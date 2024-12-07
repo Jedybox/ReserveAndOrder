@@ -210,6 +210,9 @@
                   <Properties>
                     <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="maincoursesMenu.getVerticalScrollBar().setUnitIncrement(16);"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                       <CardConstraints cardName="card2"/>
@@ -692,6 +695,9 @@
                   <Properties>
                     <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="appetizersMenu.getVerticalScrollBar().setUnitIncrement(16);"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                       <CardConstraints cardName="card3"/>
@@ -1155,6 +1161,12 @@
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JScrollPane" name="dessertMenu">
+                  <Properties>
+                    <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="dessertMenu.getVerticalScrollBar().setUnitIncrement(16);"/>
+                  </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                       <CardConstraints cardName="card5"/>
@@ -1185,7 +1197,7 @@
                                               <Group type="102" attributes="0">
                                                   <Component id="jLabel105" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="32767" attributes="0"/>
-                                                  <Component id="jButton31" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="cheesecakebtn" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" attributes="0">
                                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -1210,12 +1222,12 @@
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <Component id="jLabel113" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="32767" attributes="0"/>
-                                                          <Component id="jButton33" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="clavacakebtn" min="-2" max="-2" attributes="0"/>
                                                       </Group>
                                                       <Group type="102" attributes="0">
                                                           <Component id="jLabel107" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="32767" attributes="0"/>
-                                                          <Component id="jButton32" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="tiramasubtn" min="-2" max="-2" attributes="0"/>
                                                       </Group>
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -1232,7 +1244,7 @@
                                                       <Group type="102" attributes="0">
                                                           <Component id="jLabel115" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="32767" attributes="0"/>
-                                                          <Component id="jButton34" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="carrotcakebtn" min="-2" max="-2" attributes="0"/>
                                                       </Group>
                                                       <Group type="102" attributes="0">
                                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -1264,12 +1276,12 @@
                                                       </Group>
                                                   </Group>
                                                   <EmptySpace pref="61" max="32767" attributes="0"/>
-                                                  <Component id="jButton36" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="churrosbtn" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" attributes="0">
                                                   <Component id="jLabel121" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="32767" attributes="0"/>
-                                                  <Component id="jButton35" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="sundaebtn" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -1290,7 +1302,7 @@
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel105" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jButton31" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cheesecakebtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Component id="jLabel93" min="-2" max="-2" attributes="0"/>
@@ -1304,7 +1316,7 @@
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel107" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jButton32" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="tiramasubtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Component id="jLabel106" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1318,7 +1330,7 @@
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel113" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jButton33" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="clavacakebtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Component id="jLabel110" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1332,7 +1344,7 @@
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel115" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jButton34" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="carrotcakebtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Component id="jLabel114" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1346,7 +1358,7 @@
                                           <Component id="jLabel119" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="jButton35" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="sundaebtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel118" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -1361,7 +1373,7 @@
                                           <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel124" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jButton36" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="churrosbtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -1402,13 +1414,16 @@
                             <Property name="text" type="java.lang.String" value="Price: PHP 150"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton31">
+                        <Component class="javax.swing.JButton" name="cheesecakebtn">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="18" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Order"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cheesecakebtnActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel106">
                           <Properties>
@@ -1441,13 +1456,16 @@
                             <Property name="text" type="java.lang.String" value="Tiramisu"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton32">
+                        <Component class="javax.swing.JButton" name="tiramasubtn">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="18" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Order"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tiramasubtnActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel110">
                           <Properties>
@@ -1480,13 +1498,16 @@
                             <Property name="text" type="java.lang.String" value="Price: PHP 150"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton33">
+                        <Component class="javax.swing.JButton" name="clavacakebtn">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="18" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Order"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clavacakebtnActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel114">
                           <Properties>
@@ -1519,13 +1540,16 @@
                             <Property name="text" type="java.lang.String" value="Carrot Cake"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton34">
+                        <Component class="javax.swing.JButton" name="carrotcakebtn">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="18" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Order"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="carrotcakebtnActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel118">
                           <Properties>
@@ -1558,13 +1582,16 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton35">
+                        <Component class="javax.swing.JButton" name="sundaebtn">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="18" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Order"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sundaebtnActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel122">
                           <Properties>
@@ -1597,19 +1624,25 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton36">
+                        <Component class="javax.swing.JButton" name="churrosbtn">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="18" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Order"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="churrosbtnActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JScrollPane" name="drinksMenu">
+                  <Properties>
+                    <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                       <CardConstraints cardName="card4"/>
@@ -2155,6 +2188,12 @@
                   </Layout>
                   <SubComponents>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane">
+                      <Properties>
+                        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="drinksMenu.getVerticalScrollBar().setUnitIncrement(16);"/>
+                      </AuxValues>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
@@ -2371,9 +2410,6 @@
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="guestAmountKeyTyped"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>

@@ -182,11 +182,9 @@ public class DatabaseManager {
 
             if (rs.next()) {
                 String dateString = rs.getString("date");
-                String timeString = rs.getString("time");
 
                 // Define the formatters
                 DateTimeFormatter dFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
-                DateTimeFormatter tFormatter = DateTimeFormatter.ofPattern("h:mm a");
 
                 // Parse the date and time
                 LocalDate now = LocalDate.now();
