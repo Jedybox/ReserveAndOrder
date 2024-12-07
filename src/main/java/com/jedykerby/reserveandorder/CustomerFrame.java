@@ -11,11 +11,10 @@ import foodclasses.MainCourse;
 import foodclasses.Order;
 
 import java.text.SimpleDateFormat;
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -1606,7 +1605,7 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         minutes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45" }));
 
-        timing.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Am", "Pm" }));
+        timing.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
 
         orderbtn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         orderbtn.setText("Order");
@@ -1912,6 +1911,11 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         jButton13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton13.setText("Cancel Reservation");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel20.setText("Orders");
@@ -2339,108 +2343,53 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         try {
             amountOfGuest = Integer.parseInt(this.guestAmount.getText());
+            if (amountOfGuest > 15) {
+                JOptionPane.showMessageDialog(this, "The maximum amount of guests is 15", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(
-                this, 
-                "Please enter a valid number", 
-                "Error", 
-                JOptionPane.ERROR_MESSAGE);
-
-            return;
-        }
-
-        if (amountOfGuest > 15) {
-            
-            JOptionPane.showMessageDialog(
-                this, 
-                "The maximum amount of guests is 15", 
-                "Error", 
-                JOptionPane.ERROR_MESSAGE);
-
+            JOptionPane.showMessageDialog(this, "Please enter a valid number", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         if (this.date.getCalendar() == null) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Please select a date",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this, "Please select a date", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        String meridiem = this.timing.getSelectedItem().toString();
+        String time = this.hours.getSelectedItem().toString() + ":" + this.minutes.getSelectedItem().toString() + " " + this.timing.getSelectedItem().toString();
 
-        int year = this.date.getCalendar().get(Calendar.YEAR);
-        int month = this.date.getCalendar().get(Calendar.MONTH) + 1;
-        int day = this.date.getCalendar().get(Calendar.DAY_OF_MONTH);
+        String date = new SimpleDateFormat("MMM d, yyyy").format(this.date.getDate());
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mm a");
         
-        int hour = Integer.parseInt(this.hours.getSelectedItem().toString());
-        int minute = Integer.parseInt(this.minutes.getSelectedItem().toString());
+        LocalDate selectedDate = LocalDate.parse(date, dateTimeFormatter);
+        LocalTime selectedTime = LocalTime.parse(time, timeFormatter);
 
-        DateTimeFormatter ytf = DateTimeFormatter.ofPattern("yyyy");
-        DateTimeFormatter mtf = DateTimeFormatter.ofPattern("MM");
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd");
-        DateTimeFormatter htf = DateTimeFormatter.ofPattern("hh");
-        DateTimeFormatter mntf = DateTimeFormatter.ofPattern("mm");
-        LocalDateTime now = LocalDateTime.now();
-
-        int currentYear = Integer.parseInt(ytf.format(now));
-        int currentMonth = Integer.parseInt(mtf.format(now));
-        int currentDay = Integer.parseInt(dtf.format(now));
-        int currentHour = Integer.parseInt(htf.format(now));
-        int currentMinute = Integer.parseInt(mntf.format(now));
-
-        if (year < currentYear || month < currentMonth || day < currentDay) {
-            JOptionPane.showMessageDialog(
-                null, 
-                "Please enter a valid date", 
-                "Error", 
-                JOptionPane.ERROR_MESSAGE);
-
+        if (selectedDate.isBefore(LocalDate.now())) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid date", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (meridiem.equals("Pm") && hour < 10 && minute > 30) {
-            JOptionPane.showMessageDialog(
-                null, 
-                "Sorry, we are closed/closing at this time", 
-                "Invalid Time", 
-                JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        if (meridiem.equals("Am") && hour < 10) {
-            JOptionPane.showMessageDialog(
-                null, 
-                "Sorry, we are closed at this time", 
-                "Invalid Time", 
-                JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        if (year == currentYear && 
-            month == currentMonth && 
-            day == currentDay) {
+        if (selectedDate.isEqual(LocalDate.now())) {
             
-            if (hour < currentHour) {
-                JOptionPane.showMessageDialog(
-                    null, 
-                    "Sorry, we are closed/closing at this time", 
-                    "Invalid Time", 
-                    JOptionPane.INFORMATION_MESSAGE);
+            if (selectedTime.isBefore(LocalTime.now())) {
+                JOptionPane.showMessageDialog(this, "Please enter a valid time", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            if (currentHour == hour && currentMinute - minute < 20) {
-                JOptionPane.showMessageDialog(
-                    null, 
-                    "Sorry, we do not allow reservations less than 20 minutes from now", 
-                    "Invalid Time", 
-                    JOptionPane.INFORMATION_MESSAGE);
+            if (selectedTime.isBefore(LocalTime.now().plusMinutes(20))) {
+                JOptionPane.showMessageDialog(this, "Sorry, we do not allow reservations less than 20 minutes from now", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
+        }
+
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to make a reservation?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+        if (dialogResult != JOptionPane.YES_OPTION) {
+            return;
         }
 
         this.cardPages.removeAll();
@@ -2457,7 +2406,7 @@ public class CustomerFrame extends javax.swing.JFrame {
             amountOfGuest = Integer.parseInt(this.guestAmount.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(
-                null, 
+                this, 
                 "Please enter a valid number", 
                 "Error", 
                 JOptionPane.ERROR_MESSAGE);
@@ -2468,7 +2417,7 @@ public class CustomerFrame extends javax.swing.JFrame {
         if (amountOfGuest > 15) {
             
             JOptionPane.showMessageDialog(
-                null, 
+                this, 
                 "The maximum amount of guests is 15", 
                 "Error", 
                 JOptionPane.ERROR_MESSAGE);
@@ -2486,84 +2435,36 @@ public class CustomerFrame extends javax.swing.JFrame {
             return;
         }
         
-        String meridiem = this.timing.getSelectedItem().toString();
+        String time = this.hours.getSelectedItem().toString() + ":" + this.minutes.getSelectedItem().toString() + " " + this.timing.getSelectedItem().toString();
 
-        int year = this.date.getCalendar().get(Calendar.YEAR);
-        int month = this.date.getCalendar().get(Calendar.MONTH) + 1;
-        int day = this.date.getCalendar().get(Calendar.DAY_OF_MONTH);
+        String date = new SimpleDateFormat("MMM d, yyyy").format(this.date.getDate());
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mm a");
         
-        int hour = Integer.parseInt(this.hours.getSelectedItem().toString());
-        int minute = Integer.parseInt(this.minutes.getSelectedItem().toString());
+        LocalDate selectedDate = LocalDate.parse(date, dateTimeFormatter);
+        LocalTime selectedTime = LocalTime.parse(time, timeFormatter);
 
-        DateTimeFormatter ytf = DateTimeFormatter.ofPattern("yyyy");
-        DateTimeFormatter mtf = DateTimeFormatter.ofPattern("MM");
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd");
-        DateTimeFormatter htf = DateTimeFormatter.ofPattern("hh");
-        DateTimeFormatter mntf = DateTimeFormatter.ofPattern("mm");
-        LocalDateTime now = LocalDateTime.now();
-
-        int currentYear = Integer.parseInt(ytf.format(now));
-        int currentMonth = Integer.parseInt(mtf.format(now));
-        int currentDay = Integer.parseInt(dtf.format(now));
-        int currentHour = Integer.parseInt(htf.format(now));
-        int currentMinute = Integer.parseInt(mntf.format(now));
-
-        if (year < currentYear || month < currentMonth || day < currentDay) {
-            JOptionPane.showMessageDialog(
-                null, 
-                "Please enter a valid date", 
-                "Error", 
-                JOptionPane.ERROR_MESSAGE);
-
+        if (selectedDate.isBefore(LocalDate.now())) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid date", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (meridiem.equals("Pm") && hour < 10 && minute > 30) {
-            JOptionPane.showMessageDialog(
-                null, 
-                "Sorry, we are closed/closing at this time", 
-                "Invalid Time", 
-                JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        if (meridiem.equals("Am") && hour < 10) {
-            JOptionPane.showMessageDialog(
-                null, 
-                "Sorry, we are closed at this time", 
-                "Invalid Time", 
-                JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        if (year == currentYear && 
-            month == currentMonth && 
-            day == currentDay) {
+        if (selectedDate.isEqual(LocalDate.now())) {
             
-            if (hour < currentHour) {
-                JOptionPane.showMessageDialog(
-                    null, 
-                    "Sorry, we are closed/closing at this time", 
-                    "Invalid Time", 
-                    JOptionPane.INFORMATION_MESSAGE);
+            if (selectedTime.isBefore(LocalTime.now())) {
+                JOptionPane.showMessageDialog(this, "Please enter a valid time", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            if (currentHour == hour && currentMinute - minute < 20) {
-                JOptionPane.showMessageDialog(
-                    null, 
-                    "Sorry, we do not allow reservations less than 20 minutes from now", 
-                    "Invalid Time", 
-                    JOptionPane.INFORMATION_MESSAGE);
+            if (selectedTime.isBefore(LocalTime.now().plusMinutes(20))) {
+                JOptionPane.showMessageDialog(this, "Sorry, we do not allow reservations less than 20 minutes from now", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
         }
 
-        int dialogResult = JOptionPane.showConfirmDialog(
-            this, 
-            "Are you sure you want to make a reservation?", 
-            "Confirmation", 
-            JOptionPane.YES_NO_OPTION);
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to make a reservation?", "Confirmation", JOptionPane.YES_NO_OPTION);
 
         if (dialogResult != JOptionPane.YES_OPTION) {
             return;
@@ -2577,12 +2478,6 @@ public class CustomerFrame extends javax.swing.JFrame {
                          <--NO-ORDERS-->
                          =======================================
                          """;
-        
-        
-        
-        String time  =  this.hours.getSelectedItem().toString() + ":" +
-                        this.minutes.getSelectedItem().toString() + "" +
-                        this.timing.getSelectedItem().toString();
                         
         DatabaseManager.addReservation(
                 customer,
@@ -3248,6 +3143,48 @@ public class CustomerFrame extends javax.swing.JFrame {
         this.cardPages.revalidate();
         this.cardPages.repaint();
     }//GEN-LAST:event_cancelbtn1ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        String dateString = this.finalDate.getText().replace("Date: ", "");
+        String timeString = this.finaltime.getText().replace("Time: ", "");
+
+        System.out.println(dateString);
+        System.out.println(timeString);
+
+        // Define the formatters
+        DateTimeFormatter dFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
+        DateTimeFormatter tFormatter = DateTimeFormatter.ofPattern("h:mm a");
+
+        // Parse the date and time
+        LocalDate now = LocalDate.now();
+        LocalDate date = LocalDate.parse(dateString, dFormatter);
+        LocalTime time = LocalTime.parse(timeString, tFormatter);
+
+        if (now.isEqual(date)  && time.isBefore(LocalTime.now().plusMinutes(20))) {
+            JOptionPane.showMessageDialog(this, "Sorry, you cannot cancel a reservation less than 20 minutes from now", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel your reservation?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+        if (dialogResult != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        if (this.payment > 0) {
+            JOptionPane.showMessageDialog(this, "You have successfully cancelled your reservation. Your payment of PHP" + this.payment + " will be refunded to you.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "You have successfully cancelled your reservation.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        DatabaseManager.deleteReservation(customer);
+
+        this.cardPages.removeAll();
+        this.cardPages.add(welcome);
+        this.cardPages.revalidate();
+        this.cardPages.repaint();
+
+    }//GEN-LAST:event_jButton13ActionPerformed
     
     private void renderReservation() {
         ArrayList<Object> reservation = DatabaseManager.getReservation(customer);
@@ -3260,7 +3197,6 @@ public class CustomerFrame extends javax.swing.JFrame {
         this.reservationNumber.setText(reservation.get(5).toString());
         this.payment = Double.parseDouble(reservation.get(6).toString());
         
-        System.out.print(this.payment);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

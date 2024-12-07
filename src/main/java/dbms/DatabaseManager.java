@@ -3,6 +3,9 @@ package dbms;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import users.Customer;
@@ -171,13 +174,39 @@ public class DatabaseManager {
     public static boolean hasReservation(Customer customer) {
         String selectSQL = "SELECT * FROM reservations WHERE user = '" + customer.getName() + "';";
 
+        String deleteSQL = "DELETE FROM reservations WHERE user = '" + customer.getName() + "';";
         try (Connection conn = DriverManager.getConnection(url); 
             Statement stmt = conn.createStatement();) {
 
             ResultSet rs = stmt.executeQuery(selectSQL);
 
             if (rs.next()) {
-                return true;
+                String dateString = rs.getString("date");
+                String timeString = rs.getString("time");
+
+                // Define the formatters
+                DateTimeFormatter dFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
+                DateTimeFormatter tFormatter = DateTimeFormatter.ofPattern("h:mm a");
+
+                // Parse the date and time
+                LocalDate now = LocalDate.now();
+                LocalDate date = LocalDate.parse(dateString, dFormatter);
+                LocalTime time = LocalTime.parse(timeString, tFormatter);
+
+                if (!now.isBefore(date)) {
+                    stmt.execute(deleteSQL); // Delete if the date is in the past
+                    return false;
+                }
+
+                if (now.isEqual(date)) { // If the date is today
+                    LocalTime nowTime = LocalTime.now();
+                    if (!nowTime.isBefore(time)) {
+                        stmt.execute(deleteSQL); // Delete if the time is in the past
+                        return false;
+                    }
+                }
+
+                return true; // Otherwise, the date-time is valid
             }
 
         } catch (SQLException e) {
